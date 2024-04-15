@@ -11,13 +11,3 @@ Route::get('/acceuil', function () {
 });
 
 
-// route du formulaire de recherche
-
-Route::get('/sidebar', function () {
-    return view('sidebar');
-
-});
-
-// route barre de recherche
-
-Route::get('/search' , [postController::class, 'search']);
