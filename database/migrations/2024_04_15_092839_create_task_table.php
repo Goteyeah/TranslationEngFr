@@ -9,6 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    // cette tache sera les traductions potentiels de mes mots en anglais...
+
     public function up(): void
     {
         Schema::create('task', function (Blueprint $table) {
@@ -17,6 +20,8 @@ return new class extends Migration
             $table->boolean('active')->default(1);
             $table->timestamps();
         });
+
+    //fabrique mes tables pour stocker mes taches/mots en anglais
 
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();

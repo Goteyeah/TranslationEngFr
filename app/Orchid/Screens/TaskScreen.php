@@ -8,6 +8,9 @@ use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\ModalToggle;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Orchid\Screen\TD;
+
+
 
 class TaskScreen extends Screen
 {
@@ -18,7 +21,9 @@ class TaskScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'tasks'=>Task::latest()->get(),
+        ];
     }
 
     /**
@@ -28,14 +33,14 @@ class TaskScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Simple to-do List';
+        return 'Ajouter un mot en anglais';
     }
 
     //jai ajouter la methode description car je ne la trouvais pas par default a la creation de la screen
 
 public function description(): ?string 
 {
-    return "Orchid Quickstart";
+    return "Vous pouvez ajouter un ou plusieurs mots en anglais  dans une limite de 3 mots par jour";
 }
 
     /**
@@ -47,7 +52,7 @@ public function description(): ?string
     {
         return [
 
-ModalToggle::make('Add Task')
+ModalToggle::make('Ajout du mot')
 ->modal('taskModal')
 ->method('create')
 ->icon('Plus'),
@@ -64,15 +69,21 @@ ModalToggle::make('Add Task')
     public function layout(): iterable
     {
         return [
+
+            Layout::table('tasks', [
+                //  TD::make('name'),
+            ]),
+
+                      
             Layout::modal('taskModal', Layout::rows([
                 Input::make('task.name')
                 ->title('Nom de la tache')
-                ->placeholder('Entre le nom de la tache')
+                ->placeholder('Entre le mot')
                 ->help('Aide moi stoplerrrrrr'),
 
             ]))
             ->title('Creer une tache')
-            ->applyButton('boutton confirmer ajout d"une  Tache'),
+            ->applyButton('boutton confirmer ajout d"un mot'),
         ];
     }
 

@@ -34,13 +34,13 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-// ajouter ajoute par moi
+// ajouter ajoute par moi ***************************************************
 
-            Menu::make('Tasks')
+            Menu::make('Task')
             ->icon('bag')
             ->route('platform.task')
             ->title('Tools'),
-//
+//***************************************************************************** */
             Menu::make('Get Started')
                 ->icon('bs.book')
                 ->title('Navigation')

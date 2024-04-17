@@ -20,7 +20,12 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Idea;
+// tout ce que j'ai rajouté pour la screen des tache et la screen des state
 use App\Orchid\Screens\TaskScreen;
+use App\Orchid\Screens\StateScreen;
+// les registrations routes pour le crud PostlistScreen et PosteditScreen
+use App\Orchid\Screens\PostEditScreen;
+use App\Orchid\Screens\PostListScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +111,7 @@ Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.exam
 
 Route::screen('/idea', Idea::class)->name('platform.idea');
 
+
 // la route vers la screen il y a un breadcrumbs cest pour aller en arrière en cliquant sur un mot
 
 Route::screen('Task', TaskScreen::class)
@@ -116,3 +122,15 @@ Route::screen('Task', TaskScreen::class)
         ->push('Task');
 
     });
+    
+// la route pour la screen statescreen ( nombre de clics)
+
+Route::screen('state', StateScreen::class)->name('state');
+
+// les route pour le crud postlistscreen et posteditscreen
+
+Route::screen('post/{post?}', PostEditScreen::class)
+    ->name('platform.post.edit');
+
+Route::screen('posts', PostListScreen::class)
+    ->name('platform.post.list');
