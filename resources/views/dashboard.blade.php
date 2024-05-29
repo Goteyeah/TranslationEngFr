@@ -1,8 +1,11 @@
 <x-app-layout>
+    <h5><h5>ICI----------------------------------------------</h5></h5>
     <x-slot name="header">
+    <h5>Le layout slot layout</h5>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
+        <h5>Le layout slot layout</h5>
     </x-slot>
 
     <div class="py-12">
@@ -14,4 +17,5 @@
             </div>
         </div>
     </div>
+    <h5>ICI----------------------------------------------</h5>
 </x-app-layout>

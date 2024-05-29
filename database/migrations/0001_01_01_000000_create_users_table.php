@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('post_words'); // je rajoute les colonnes de words et translations
+            $table->string('post_translations'); // je rajoute les colonnes de words et translations
             $table->rememberToken();
             $table->timestamps();
         });

@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function Word(): HasMany     //relation 0-n de la table user vers Word
+    {
+        return $this->hasMany(Word::class);
+    }
+
+    public function Translation(): HasMany //relation 0-n de la table user vers translation ( plusieur traduc concernent 1 utilisateur)
+    {
+        return $this->hasMany(Translation::class);
+    }
 }

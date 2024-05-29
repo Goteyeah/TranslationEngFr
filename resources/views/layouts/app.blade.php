@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @include('layouts.navigation') <!-- ce code renvoie le code source de app/view/AppLayout-->
 
             <!-- Page Heading -->
             @if (isset($header))
