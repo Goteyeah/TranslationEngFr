@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+//ajouté
+use App\Models\User;
+//ajouté
 
 class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize(): bool 
     {
         return true;
     }
@@ -40,6 +43,15 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+
+        //ajouté bloquage de mail
+        $user = User::where('email', $this->email)->first(); //lemail en premier
+        if ($user && $user->blocked){   // si blocké
+            throw ValidationException::withMessages([ //message d'exception compte bloqué
+                'email' => 'Compte bloqué, revennez plus tard!',
+            ]);
+        }
+// ajouté bloquage de mail
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

@@ -1,11 +1,11 @@
 <x-app-layout>
-    <h5><h5>ICI----------------------------------------------</h5></h5>
+    
+    
     <x-slot name="header">
-    <h5>Le layout slot layout</h5>
+    
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-        <h5>Le layout slot layout</h5>
     </x-slot>
 
     <div class="py-12">
@@ -17,5 +17,27 @@
             </div>
         </div>
     </div>
-    <h5>ICI----------------------------------------------</h5>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+              <a href="{{ route('word.show') }}">Aller à la liste de mots à traduire</a><br>
+             
+             </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <a href="{{ route( 'dictionary.show' ) }}">Aller au dictionaire</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

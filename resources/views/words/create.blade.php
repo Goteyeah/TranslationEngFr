@@ -5,16 +5,30 @@
 <form method='POST' action="{{ route ('word.store')}}">
      @csrf
     
+
+<!-- si il y a la moindre erreur dans la validation des données-->
+
+@if ($errors->any()) 
+    <ul id="errors">
+        @foreach( $errors->all() as $error)
+        <li>{{ $error}}</li>
+        @endforeach
+        </ul>
+        @endif
+
+<!-- si il y a la moindre erreur dans la validation des données-->
+<!-- test tailwind-->
+
+
+<!-- test tailwind-->         
      <input name="words" 
      type="text"
      id="word"
-     placeholder="word en question" />
+     placeholder="Mot anglais"
+     value="{{old('word')}}" />
 
      <input type="checkbox" name="isValid" id="isValid">
     <label for="isValid">Activer</label>
-    
-    <input type="checkbox" name="isDictionary" id="isDictionary">
-    <label for="isDictionary">Activer</label>
     
 <button type="submit"> ENREGISTRER </button>
 

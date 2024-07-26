@@ -8,9 +8,18 @@
     <title>Document</title>
   </head>
   <body>
-  @component('components.exemple-t-w')
-<h5>essai composant</h5>
-@endcomponent
+
+  <x-testCompo title='lidjhsfijqhsfkjhdsilfhs'>
+    <p>je rempli le slot</p>
+    <p $slotB=dhhd></p>
+        <x-slot name='slotB'>
+          <a href="m">je rempli encore le modal avec slot</a>
+        </x-slot>
+</x-testCompo>
 <!--component venant de exemple-t-w.blade dans ressource/ view/ components-->
-  </body>
-</html>
+
+<x-component_telecharge >
+  <p>pezmize slot</p>
+  <x-slot name=slotB> menu champagne </x-slot>
+</x-component_telecharge>
+

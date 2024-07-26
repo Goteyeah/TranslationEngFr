@@ -1,5 +1,9 @@
+
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    
+
+
+      <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
@@ -8,6 +12,56 @@
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
+
+        <!-- Surname JE SUIS DANS LE LAYOUT auth.registrer.blade et les x-quelquechose sont des components-->
+         <div class="mt-4">
+            <x-input-label for="surname" :value="__('Surname')" />
+            <x-text-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autocomplete="surname"/>
+            <x-input-error :messages="$errors->get('surname')" class="mt-2" />
+         </div>
+        <!-- Surname JE SUIS DANS LE LAYOUT auth.registrer.blade et les x-quelquechose sont des components -->
+
+       
+         <!-- boutton radio pour genre avec un flex item center avec le même name="genre"-->
+<div class="flex items-center space-x-4 ">
+         <div class="mt-4">
+            <x-input-label for="genre" :value="__('Homme')" />
+            <x-text-input id="genre" class="block mt-1 w-full" type="radio" name="genre" :value="0" required autocomplete="genre"/>
+            <x-input-error :messages="$errors->get('genre')" class="mt-2" />
+         </div>
+
+         <div class="mt-4">
+            <x-input-label for="genre" :value="__('Femme')" />
+            <x-text-input id="genre" class="block mt-1 w-full" type="radio" name="genre" :value="1" required autocomplete="genre"/>
+            <x-input-error :messages="$errors->get('genre')" class="mt-2" />
+         </div>
+    </div><br>
+    <div class="flex items-center space-x-4 ">
+        <div class="mt-4"></div>
+        <x-input-label for="genre" :value="__('Section')" />
+          
+    </div>
+ 
+            
+             
+
+ <!-- menu deroulant rempli du tableau de section qui vient de nbsection-->
+ <div class="mt-4">
+
+    <select name="sections">
+        @foreach($tabSection as $section)
+   <option value="{{$section->id}}">{{$section->name}}</a></option>
+        @endforeach
+    </select>
+
+</div>
+<!-- menu deroulant rempli du tableau de section qui vient de nbsection--->
+
+
+
+              
+
+
 
         <!-- Email Address -->
         <div class="mt-4">

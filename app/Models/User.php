@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany; // on creer une relation 1n
+use Illuminate\Database\Eloquent\Relations\BelongTo;
+
 
 class User extends Authenticatable
 {
@@ -18,8 +21,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'genre',
+        // 'section',
         'email',
         'password',
+        
     ];
 
     /**
@@ -47,11 +54,18 @@ class User extends Authenticatable
 
     public function Word(): HasMany     //relation 0-n de la table user vers Word
     {
-        return $this->hasMany(Word::class);
+        return $this->HasMany(Word::class);
     }
 
     public function Translation(): HasMany //relation 0-n de la table user vers translation ( plusieur traduc concernent 1 utilisateur)
     {
-        return $this->hasMany(Translation::class);
+        return $this->HasMany(Translation::class);
     }
+
+    public function Section(): BelongsTo 
+    {
+        return $this->belongsto(Section::class);
+    }
+
+   
 }

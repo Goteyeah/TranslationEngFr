@@ -7,20 +7,25 @@
      <!-- <label for="choisisLeMot">Quel mot voulez vous traduire ?</label>
     <input type="number" name="choisisLeMot" id="choisisLeMot"> -->
 
-    <input name="cache" type="hidden" value="{{$id}}">
+<!-- si il y a la moindre erreur dans la validation des données-->
 
+@if ($errors->any()) 
+    <ul id="errors">
+        @foreach( $errors->all() as $error)
+        <li>{{ $error}}</li>
+        @endforeach
+        </ul>
+        @endif
+
+<!-- si il y a la moindre erreur dans la validation des données-->
+
+    <input name="cache" type="hidden" value="{{$id}}">
+<h1>
+    <h1 style='color: red;'> Proposer une traduction pour le mot: {{$WordTranslate->words}}</h1>
      <label for="traductionsForm">Traduction</label>
     <input type="text" name="traductionsForm" id="traductionsForm">
-    
-<label for="stars">ETOILES</label>
-<input type="number" name="stars" id="stars">
+</h1>    
 
-    <input type="checkbox" name="isValid" id="isValid">
-    <label for="isValid">Activer</label>
-    
-    <input type="checkbox" name="isDictionary" id="isDictionary">
-    <label for="isDictionary">Activer</label>
-    
 <button type="submit"> ENREGISTRER </button>
 
 

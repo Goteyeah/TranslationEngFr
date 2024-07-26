@@ -8,7 +8,7 @@
 <body>
     <h1>Formulaire de changement de traduction</h1>
     <div>
-        <form method="POST" action="{{ route('translation.update', $translation->id) }}">
+        <form method="POST" action="{{ route('translation.update', $translation->id )}}">
 @csrf
 
 <label for="ancienMot">traduction actuel</label>
@@ -19,8 +19,11 @@
 <label for="varNewTrans">Mot/traduction de remplacement</label>
 <input name="varNewTrans" id="varNewTrans" type="text">
 
-<input type="checkbox" name="valeurTestA">
+<!-- <input type="checkbox" name="isDictionary">
 <input type="checkbox" name='valeurTestB'>
+
+<label for="stars">ETOILES</label>
+<input type="number" name="stars" id="stars"> -->
 
 <button type="submit" value="enregistrer">SAUVEGARDER</button>
 
