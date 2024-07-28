@@ -57,7 +57,7 @@ $Mot->translations()->save($traduc);// je sauvegarde $traduc dans le mot
 
 // redirection et message
 return redirect()
-->action([WordController::class, 'show'])// redirection vers la vue word show
+->action([WordController::class, 'show'])// redirection vers la route word show
 ->with('message', 'la traduction de '. $traduc->translation . ' pour le mot '.$Mot->words .' est enregistrée'); //message de succes transmi à la vue show
 // redirection et message
 
@@ -108,7 +108,7 @@ return redirect()
     
      }
      //ETOILES methode
-
+     
      // compte et decompte avec carbon des etoiles par utilisateur
 
     function restartStars(User $userNbStars)
@@ -137,19 +137,28 @@ return redirect()
     {     
    
         $translation = Translation::findOrFail($id); // findorfail est une methode static
-    //    $translation->stars = $request->input('stars');
         $userStar = $this->addStar($translation);//appelle de la methode addStar  ( juste au dessus de la methode update)
         
         $ancienneTr = $translation->translation;
-        $translation->translation = $request->input('varNewTrans');
+        $newTranslation =  $request->input('varNewTrans');
+        $translation->translation = $newTranslation;
         
         if ($translation->translation == null)
         {   // si pas de nouvelle traduction on garde l'ancienne
             $translation->translation= $ancienneTr;
         }
+       dump($translation->translation);
+        
        
-       $dateRemain = $this->restartStars($userStar); //appelle de la methode restartStars ( juste au dessus de la methode update)
+        $dateRemain = $this->restartStars($userStar); //appelle de la methode restartStars ( juste au dessus de la methode update)
       
+        if ( $translation->isDirty()) {
+            $translation->save(); //message flash vers la vue show word
+            echo('changé');
+            dd("changé");
+            
+         }
+          
      
 //s occupe de la fonction dictionaire
     //récupère le mot par la traduction associé

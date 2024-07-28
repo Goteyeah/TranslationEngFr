@@ -108,7 +108,7 @@ function getWords(array $params = array()): LengthAwarePaginator
 // on positionne le methode getword à L'EXTERIEUR de show
 // je positionne la methode de classement a l'exterieur de la methode show
 function classement($query,int $ordo){
-    dump($ordo);
+    
     
     if($ordo==1)
      {
@@ -118,7 +118,7 @@ function classement($query,int $ordo){
      elseif ($ordo == 3) 
      {
         $query->orderBy('created_at','desc'); //'desc' ordre inverse 
-        dump('passe par word orderby');
+        
     }
     elseif ($ordo==2) {
 

@@ -33,42 +33,52 @@ class dictionaryController extends Controller
         //
     }
     
-     // equivalant à ce quil y a dans le manager method getmovies du projet de thomas
-           // ca recherche soit par title ( words dans ma bdd) soit par id
+  // on positionne le methode getword à l'EXTERIEUR de show
+// code pour la recherche de mot par id ou par mot( je peux faire plein d'autre type de recherche cest à regarder grace au projet de thomas dasn les managers controller et vue)  
 
-    function getWords(array $params = array()): LengthAwarePaginator
-    {
-        
-     $query = word::select('id','words');
-     
-     if (isset($params['id']) && !empty($params['id']))
-     {
-         $query->where('id','=',$params['id']);
-     }
-     if (isset($params['title'])&& !empty($params['title']))
-     {
-         $query->where('words','like','%'.$params['title'].'%');
-
-     }
-     return $query->paginate(1)->withQueryString();// pagination, withQueryString ajoute les paramètres de la requete dans la barre d'adresse: regarder dans laravel doc dans le chapitre pagination, custom pagination
+function getWords(array $params = array()): LengthAwarePaginator
+{
+    $query = word::with(['translations','user']) 
+    
+        ->select('id','words','user_id');//selection des tables avec toutes leur collone dans cette requête
+       
+        // La clé étrangère user_id est nécessaire pour que Eloquent puisse faire correspondre les traductions avec les mots, et l auteur de la traduction et lauteur du mot posté.
+                                
+    if (isset($params['id']) && !empty($params['id'])){
+        $query->where('id','=',$params['id']);
+    } 
+            
+    if (isset($params['title']) && !empty($params['title'])){
+        $query->where('words','like','%'.$params['title'].'%');
     }
-     // equivalant à ce quil y a dans le manager method getmovies du projet de thomas
-           // ca recherche soit par title ( words dans ma bdd) soit par id
+    
+
+    $result = $query->paginate(1)->withQueryString();
+
+    if($result->isEmpty())
+    {
+        echo('Le mot est inexistant dans la base de données, postez le pour enrichir la base !');
+    }
+    return $result;
+}
+    // code pour la recherche de mot par id ou par mot( je peux faire plein d'autre type de recherche cest à regarder grace au projet de thomas dasn les managers controller et vue)  
+
+// on positionne le methode getword à L'EXTERIEUR de show
 
            //fonction de classement
     function classement($query,int $ordo){
     
     if($ordo==1)
      {
-        $query->orderBy('translation','asc');
-        dump('passe par word dans la methode show');
+        $query->orderBy('words','asc'); //query est une requête query builder et non une collection eloquent
      }
-    elseif ($ordo == 3) 
+    elseif ($ordo == 2) 
      {
         $query->orderBy('created_at','desc'); //'desc' ordre inverse 
-        dump('passe par word orderby');
+        dump('dans dictionary par word orderby');
     }
-    elseif ($ordo==2) {
+    elseif ($ordo==3) 
+    {
 
         $query->withCount('translations')->orderBy('translations_count','desc'); // récupère (get) le nombre de translation (withcount translation) par mot dans tructruc (trcutruc est une collection)
        // sur des collections on ne utilise pas -> mais on itère dans un foreach
@@ -76,35 +86,27 @@ class dictionaryController extends Controller
              
         }               
         
-        return $words= $query->paginate(5)->withQueryString(); // pagination, withQueryString ajoute les paramètres de la requete dans la barre d'adresse: regarder dans laravel doc dans le chapitre pagination, custom pagination
+        return $words= $query->paginate(2)->withQueryString(); // pagination, withQueryString ajoute les paramètres de la requete dans la barre d'adresse: regarder dans laravel doc dans le chapitre pagination, custom pagination
     }
            //fonction de classement
 
     
    
-    public function show(Translation $transDicos, word $finalsWords, request $request)
+    public function show( request $request)
     {
-        
-    //    $ordo = $request->input('ordonner');
+       $ordo=$request->input('ordonner');
        $varvar = $request->input('varvar');
        $input = $request->all();
-       $query = Translation::where('isDictionary',1);  
-       $finalsWords = Word::where('translations->isDictionary',1);
-        
-           
-           
-           //equivalant à ce qu'il y a dans le controller movie search du projet de thoma
-             
-            // $recherche = $this->getWords($input); // on appelle la fonction getwords present a l'exterieur de show pour pouvoir la reutiliser dans show
-            
-           //equivalant à ce qu'il y a dans le controller movie search du projet de thoma
-           //dans le manager
-           // search controller backoffice/moviegenre ET manager movie/genre/manager
+       
+       $transDicti = Translation::where('isDictionary',1)->get();  
+       $finalsWords = Word::whereHas('translations', function($query) //selectionne les mots avec des translations isdicionary=1
+       {
+        $query->where('isDictionary',1);
+       });
 
-
-          $transDicos = $this->classement($query,1);
-
-        return view('dictionary', compact('finalsWords'));
+       $finalsWord= $this->classement($finalsWords, $ordo);
+               
+        return view('dictionary', compact('finalsWord','transDicti'));
         
     }
 

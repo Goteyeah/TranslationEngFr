@@ -53,23 +53,14 @@ value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : 
 <button type="submit" value="search">chercher</button>
 </form>
 
-<div>
-  @foreach ($recherche as $truc)
-  <h2>Mot recherché <br> {{$truc->words}}</h2>
-  @endforeach
-</div>
-
 <!--  recherche equivalent view/movie/backoffice/partial/search form -->
- 
-<h3>{{$transDicos->links()}}</h3>
-<p>@foreach($transDicos as $transDico)</p>
 
-  <h1><p>{{$transDico->word->words}}</p></h1>
- <p>{{$transDico->translation}}</p>
- <input type="button" value="{{$transDico->word->id}}">Supprimer le mot</input>
- <a href="{{ route ('word.dict.delete',['id'=>$transDico->word->id]) }}">Supprimer le mot</a>  
+@foreach($finalsWord as $finals)
+<h1>Mots traduits: {{$finals->words}} Posté par: {{$finals->user->name}}</h1>
+@foreach($finals->translations as $translation)
+<p style="color: green;">Traduction associées:  {{$translation->translation}} Traduit par {{$translation->user->name}}<p>
+  @endforeach
 @endforeach
-    <!-- An unexamined life is not worth living. - Socrates -->
-</div>
+<h3>{{$finalsWord->links()}}</h3>
 
 
