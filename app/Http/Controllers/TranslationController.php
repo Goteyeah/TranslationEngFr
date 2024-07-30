@@ -137,7 +137,11 @@ return redirect()
     {     
    
         $translation = Translation::findOrFail($id); // findorfail est une methode static
-        $userStar = $this->addStar($translation);//appelle de la methode addStar  ( juste au dessus de la methode update)
+        
+        if($request->input('stars'))
+        {
+            $userStar = $this->addStar($translation);//appelle de la methode addStar  ( juste au dessus de la methode update)
+        }
         
         $ancienneTr = $translation->translation;
         $newTranslation =  $request->input('varNewTrans');
@@ -149,13 +153,15 @@ return redirect()
         }
        dump($translation->translation);
         
-       
+       if($request->input('stars'))
+       {
         $dateRemain = $this->restartStars($userStar); //appelle de la methode restartStars ( juste au dessus de la methode update)
-      
+       }
+
         if ( $translation->isDirty()) {
             $translation->save(); //message flash vers la vue show word
-            echo('changé');
-            dd("changé");
+            $messageChange = 'Vous avez changé la traduction en : '.$translation->translation; // syntaxe de concaténation en php
+            // return view('words.show');
             
          }
           
@@ -174,8 +180,10 @@ $motpo->isDictionary = true;
 
 
 return redirect()->route('word.show')
-    ->with('userStar', $userStar)
-    ->with('dateRemain',$dateRemain);
+    ->with('userStar', $userStar ?? null)
+    ->with('dateRemain',$dateRemain ?? null)
+    ->with('message', $messageChange ?? null); // syntaxe à expliquer au jury !!!!!!
+    
 //s occupe de la fonction dictionaire   
 
 }
