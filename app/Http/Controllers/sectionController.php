@@ -38,12 +38,12 @@ class sectionController extends Controller
     
         $validatedData = $request->validate([
            
-            'tabSections' => 'string|required|max:50'
+            'tabSections' => 'string|required|max:50|alpha'
           
                  ]);
 
         $listeDeSections = new section();
-        $listeDeSections->name = $request->input('tabSections');
+        $listeDeSections->name = $validatedData['tabSections'];
         $listeDeSections->save();
         
     

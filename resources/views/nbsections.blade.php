@@ -12,6 +12,13 @@
             {{ session('status.message') }}
         </div>
     @endif
+    
+    @if ($errors->any())
+    @foreach($errors->all() as $errors)
+    <h1>{{$errors}}</h1>
+    @endforeach
+    @endif
+
     <h1>Nouvelle section</h1>    
     <form method="POST" action="{{ route('section.store') }}" >
     @csrf

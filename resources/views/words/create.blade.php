@@ -17,10 +17,7 @@
         @endif
 
 <!-- si il y a la moindre erreur dans la validation des données-->
-<!-- test tailwind-->
-
-
-<!-- test tailwind-->         
+        
      <input name="words" 
      type="text"
      id="word"
@@ -29,7 +26,7 @@
 
      <input type="checkbox" name="isValid" id="isValid">
     <label for="isValid">Activer</label>
-    
+    @csrf
 <button type="submit"> ENREGISTRER </button>
 
 

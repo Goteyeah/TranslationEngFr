@@ -32,6 +32,7 @@
 
 <!-- fonctionalitée nombre mot par page dasn la pagination -->
 <form method="get"  action="{{ route('dictionary.show')}}">
+  @csrf
         <label for="varvar">Nombre mot par page</label>
     <input type="number" name="varvar" id="varvar" value="{{ request('varvar')}}">
 <button type="submit" >soumettre</button>    
@@ -41,7 +42,7 @@
  <!-- recherche equivalent view/movie/backoffice/partial/search form-->
  <form method="get"  action="{{ route('dictionary.show')}}">
  <div>
-  <label for="id" class="form-label form-label-sm fw-bold fs-8">IDIDIDIDIDDID</label>
+  <label for="id" class="form-label form-label-sm fw-bold fs-8">Rechercher par ID</label>
   <input type="text" class="form-control form-control-sm" name="id"
   value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
 </div>
@@ -50,6 +51,7 @@
 <input type="text" class="form-control form-control-sm" name="title" 
 value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : '' }}">
 </div>
+@csrf
 <button type="submit" value="search">chercher</button>
 </form>
 

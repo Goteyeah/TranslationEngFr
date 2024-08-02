@@ -58,7 +58,6 @@ $word->user_id= auth::id(); //rempli la colonne avec l id de la personne connect
 $word->isDictionary= $request->has('isDictionary'); // renvoi un booleen
 $word->isValid = $request->has('isValid'); //renvoi un booleen
 $word->fill($validatedData);
-
 //jajoute pour le classement etoile
 $word->save();
 

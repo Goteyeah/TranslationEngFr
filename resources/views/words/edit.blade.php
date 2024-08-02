@@ -1,6 +1,12 @@
 <!-- jai utiliser route::post dans le fichier de route -->
 
 <div>
+@if ($errors->any())
+    @foreach($errors->all() as $errors)
+    <h1 style="color:green;">{{$errors}}</h1>
+    @endforeach
+    @endif
+
     <!-- il faut utiliser le nom de la route ici cest word.update-->
 <form method="POST" action="{{ route('word.update', $word->id ) }}"> <!-- ON MET LE WORD ID POUR LENVOYER AU CONTROLLEUR-->
 <!-- PAGE 8 DU CHAPITRE ORGANISER AVEC LES CONTROLEURS-->

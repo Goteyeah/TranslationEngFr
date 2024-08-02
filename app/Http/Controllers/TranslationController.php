@@ -48,7 +48,7 @@ $validatedData = $request->validate([
 
 $Mot = Word::find($request->input('cache')); // je cherche le mot d'id "cache" ( qui vient du formulaire)
 $traduc = new Translation; //creer une instance de translation
-$traduc->translation = $request->input('traductionsForm'); // je rempli $traduc grace au formualire
+$traduc->translation = $validatedData['traductionsForm']; // je rempli $traduc avec des valeurs validées grace au formualire
 
 $traduc->user_id = Auth::id();
 $Mot->translations()->save($traduc);// je sauvegarde $traduc dans le mot
@@ -180,9 +180,9 @@ $motpo->isDictionary = true;
 
 
 return redirect()->route('word.show')
-    ->with('userStar', $userStar ?? null)
-    ->with('dateRemain',$dateRemain ?? null)
-    ->with('message', $messageChange ?? null); // syntaxe à expliquer au jury !!!!!!
+    ->with('userStar', $userStar ?? null) // userStar ?? null signifie que si $userStar est défini et n'est pas null, alors $userStar sera utilisé ; sinon, null sera utilisé.
+    ->with('dateRemain',$dateRemain ?? null) //dateRemain ?? null signifie que si $dateRemain est défini et n'est pas null, alors $dateRemain sera utilisé ; sinon, null sera utilisé.
+    ->with('message', $messageChange ?? null); // le ?? est un opérateur de coalescence
     
 //s occupe de la fonction dictionaire   
 
