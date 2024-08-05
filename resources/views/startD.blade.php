@@ -10,6 +10,9 @@
   </head>
   <body>
 
+
+
+  
   <!-- Create By Joker Banny -->
 <div class="min-h-screen bg-gray-100 flex justify-center items-center px-20">
   <div class="space-y-10">
@@ -51,12 +54,12 @@
       <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
         <div class="p-6 text-center">
           <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-blue-gray-500 text-white py-1.5 px-3 text-xs mx-auto -mt-9 w-32 rounded-full !bg-blue-gray-50 pt-2 !text-blue-gray-900" style="opacity:0" data-projection-id="5"><span class="">Small Startups</span></div>
-          <h1 class="antialiased tracking-normal font-sans text-5xl font-semibold leading-tight text-blue-gray-900 flex justify-center mt-10 mb-2">$900<span class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 self-end -translate-y-1">/per month</span></h1>
+          <h1 class="antialiased tracking-normal font-sans text-5xl font-semibold leading-tight text-blue-gray-900 flex justify-center mt-10 mb-2">Mots<span class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 self-end -translate-y-1">/traductions</span></h1>
           <ul class="flex flex-col gap-3 pt-6 my-6">
             <li class="flex items-center gap-2 text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" data-slot="icon" class="w-5 h-5 text-inherit">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
               </svg>
-              <p class="block antialiased font-sans text-base leading-relaxed font-normal text-inherit">Includes legal consultation</p>
+              <p class="block antialiased font-sans text-base leading-relaxed font-normal text-inherit">Liste de mots et de traductions</p>
             </li>
             <li class="flex items-center gap-2 text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" data-slot="icon" class="w-5 h-5 text-inherit">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
@@ -76,7 +79,7 @@
       <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
         <div class="p-6 text-center">
           <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-blue-gray-500 text-white py-1.5 px-3 text-xs mx-auto -mt-9 w-32 rounded-full !bg-blue-gray-50 pt-2 !text-blue-gray-900" style="opacity:0" data-projection-id="6"><span class="">Big Enterprises</span></div>
-          <h1 class="antialiased tracking-normal font-sans text-5xl font-semibold leading-tight text-blue-gray-900 flex justify-center mt-10 mb-2">$2000<span class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 self-end -translate-y-1">/per month</span></h1>
+          <h1 class="antialiased tracking-normal font-sans text-5xl font-semibold leading-tight text-blue-gray-900 flex justify-center mt-10 mb-2">Dictionnaire<span class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 self-end -translate-y-1">/per month</span></h1>
           <ul class="flex flex-col gap-3 pt-6 my-6">
             <li class="flex items-center gap-2 text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" data-slot="icon" class="w-5 h-5 text-inherit">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>

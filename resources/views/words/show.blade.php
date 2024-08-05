@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
+
     <title>Document</title>
 </head>
 
@@ -15,6 +17,9 @@
     @endif
 </h1>
     <!-- message flash -->
+
+
+
  <!-- l alphabet de a à z -->
  @foreach (range('A','Z') as $letter) <!-- les lettres de A à Z-->
    
@@ -69,11 +74,55 @@
     <input type="text" class="form-control form-control-sm" name="id"
 value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
 </div>
-<div>
-    <label for="title" class="form-label fw-bold fs-8" >Rechercher un mot</label>
-    <input type="text" class="form-control form-control-sm" name="title" 
-    value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : '' }}">
+
+
+      <!-- premiere skin css pour la barre de recherche POUR LINSTANT ELLE CHERCHE PAR MOT-->
+      <div class="min-h-screen bg-gray-100 flex justify-center items-center px-20">
+  <div class="space-y-10">
+    <h1 class="text-center mt-10 text-4xl font-bold">Create By Joker Banny</h1>
+    <div class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+      <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input name="title" class="bg-gray-100 outline-none" type="text" placeholder="Article name or keyword..." 
+        value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : '' }}"/>
+      </div>
+      <div class="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
+      
+      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-4 h-4 ms-3 text-lg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+</svg>
+</button>
+
+<!-- skin TW pour le dropdown bleu jai changer la taille du text de 'sm' en 'lg'-->
+<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+    <ul class="py-2 text-lg text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+      </li>
+    </ul>
 </div>
+
+      </div>
+      <div class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+        <span>    <button type="submit" value="search">chercher</button>
+        </span>
+      </div>
+    </div>
+
+   <!-- skin TW pour le dropdown bleu jai changer la taille du text de 'sm' en 'lg'-->
+
+
 <div>
     <label for="translation" class="form-label fw-bold fs-8" >Rechercher une traduction</label>
     <input type="text" class="form-control form-control-sm" name="translation" 
@@ -143,7 +192,9 @@ value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
 </div>
 
 </div>
-<div>
+
+<script src="{{asset('/test.js')}}"></script>
+
 
 
     

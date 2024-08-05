@@ -94,8 +94,7 @@ function getWords(array $params = array()): LengthAwarePaginator
    
     public function show( request $request)
     {
-       $ordo=$request->input('ordonner');
-       $varvar = $request->input('varvar');
+       $ordo=($request->input('ordonner') ?? 1); //operateur de coalescence
        $input = $request->all();
        
        $transDicti = Translation::where('isDictionary',1)->get();  

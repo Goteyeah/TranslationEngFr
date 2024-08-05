@@ -43,7 +43,7 @@ class sectionController extends Controller
                  ]);
 
         $listeDeSections = new section();
-        $listeDeSections->name = $validatedData['tabSections'];
+        $listeDeSections->name = $validatedData['tabSections']; //tableau de validation
         $listeDeSections->save();
         
     
