@@ -23,19 +23,24 @@
 <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+        <a href="#" id="chercher" data-value="1" class="chercher lock px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Par mot</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+        <a href="#" id="chercher" data-value="2" class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Par traduction</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+        <a href="#" id="chercher" data-value="3" class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Par numéro</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+        <a href="#" id="chercher" data-value="4" class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
       </li>
     </ul>
 </div>
+
+<input class="" type="text" id="inputA">a</input>
+<input class="" type="text" id="inputB">b</input>
+
+
 
      
 </div>  

@@ -153,29 +153,44 @@ value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
 
 <!-- je cache -->
 
-
-    <p>nom: <a  href="{{ route('word.edit', ['id'=>$word->id])}}" ><h1  >mot : {{$word->words}} numero {{$word->id}}</h1></a></p>  <!-- je creer des liens avec la methode url que je mes dans href de la balise html <a>-->
+<div class="text-xl px-2 bg-green-200 text-green-800 rounded-full" >
+    <a  href="{{ route('word.edit', ['id'=>$word->id])}}" >mot : {{$word->words}} numero {{$word->id}}</a> <br>  <!-- je creer des liens avec la methode url que je mes dans href de la balise html <a>-->
  <!-- fonctionalitée cacher pour word->isdictionary je dois le mettre pour translation->isdictionary --> 
-
+</div>
     <!-- j'itère sur l'objet word et je 'extrait le champ "translations" de la table quand il y en a un-->
-       <p><a href="{{route('translation.create',['id'=>$word->id])}}">Créer une traduction pour {{$word->words}}</a></p>     
-
+    <!-- badge de couleur -->
+    <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xl px-3 bg-purple-200 text-purple-800 rounded-full">   
+    <!-- badge de couleur -->
+    <a   href="{{route('translation.create',['id'=>$word->id])}}">Créer une traduction pour {{$word->words}}</a>  <br>   
+</div>
     @foreach($word->translations as $translation)
-        <p>traduction : <a href="{{route('translation.edit', ['id'=>$translation->id])}}">{{$translation->translation}}</a></p>
-    
+    <div  style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-blue-200 text-blue-800 rounded-full">    
+    <a  href="{{route('translation.edit', ['id'=>$translation->id])}}">Traduction : {{$translation->translation}}</a>
+    </div>
     
  
-    <!-- etoiles -->
-        <p>{{$translation->stars}}</p>
-       
+    <!-- etoiles --><div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xxl px-3 bg-yellow-200 text-yellow-800 rounded-full">
+        <p>Nombre d'étoiles: {{$translation->stars}}</p>
+</div>
 
-        <p><a href="{{route('dictionary.update', ['id'=>$translation->id])}}">Ajouter au dictionnaire</a></p>
-
+<div style="padding-top: 0.2em; padding-bottom: 0.2rem" class="flex items-center space-x-1 text-sm px-2 bg-gray-200 text-gray-800 rounded-full">
+                <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-500 rounded-full"></div>
+        <a href="{{route('dictionary.update', ['id'=>$translation->id])}}">Ajouter au dictionnaire</a>
+</div>
     <form method="POST" action="{{ route('translation.update', ['id'=>$translation->id]) }}">
     @csrf
 
+    <div style="padding-top: 0.2em; padding-bottom: 0.2rem" class="flex items-center space-x-1 text-sm px-2 bg-gray-200 text-gray-800 rounded-full">
+    <div style="width: 0.4rem; height: 0.4rem" ></div>
+    <!-- etoile-->
+    <svg xmlns="http://www.w3.org/2000/svg" class="text-yellow-500 w-5 h-auto fill-current hover:text-yellow-600"
+            viewBox="0 0 16 16">
+            <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+        </svg>
+        <!-- étoile -->
     <button type="submit" name="stars" value="1">Ajouter une étoile</button>
-    
+</div>
     <!-- etoiles -->
 
 

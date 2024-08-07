@@ -1,8 +1,5 @@
 
 <x-guest-layout>
-    
-
-
       <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -46,12 +43,12 @@
              
 
  <!-- menu deroulant rempli du tableau de section qui vient de nbsection-->
- <div class="mt-4">
+              <div class="mt-4">
 
-    <select name="sections">
-        @foreach($tabSection as $section)
+<select name="sections">
+@foreach($tabSection as $section)
    <option value="{{$section->id}}">{{$section->name}}</a></option>
-        @endforeach
+@endforeach
     </select>
 
 </div>
