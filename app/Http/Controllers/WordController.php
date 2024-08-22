@@ -73,6 +73,7 @@ return redirect()
 
 
 }  
+
      
 // on positionne le methode getword à l'EXTERIEUR de show
 // code pour la recherche de mot par id ou par mot( je peux faire plein d'autre type de recherche cest à regarder grace au projet de thomas dasn les managers controller et vue)  
@@ -92,7 +93,14 @@ function getWords(array $params = array()): LengthAwarePaginator
                 if (isset($params['title']) && !empty($params['title'])){
                     $query->where('words','like','%'.$params['title'].'%');
                 }
-                
+            
+                if (isset($params['translation']) && !empty($params['translation'])){
+                    $query->whereHas('translations', function ($subQuery) use ($params) { //fonction anonyme (closure)// il y a des mots sans traductions
+                        $subQuery->where('translation', 'like', '%' . $params['translation'] . '%');
+                    });
+                }
+                           
+
 
                 $result = $query->paginate(1)->withQueryString();
 
@@ -152,32 +160,13 @@ function classement($query,int $ordo){
         // recherche des mot par la première lettre
 
         $rechercheWord = $this->getWords($input);  // On met this pour appeller la methode qui est a l 'exterieur de show mais dans le controller wordS
-        
+       
      
         if($ordo)
         {
              $words= $this->classement($query, $ordo);
         }
-       
-         
-       //fonctionnalité cacher en dernier de mon controller d'affichage
-
-    //    foreach($words as $word){
-    //     foreach ($word->translations as $cachercacher)
-    //     {
-    //     if ($cachercacher->isDictionary == 1)
-    //     {
-    //         $cacher='display:none';
-    //     }
-    //     else {
-    //         $cacher = 'color: red';
-    //     };
-    //     };
-    // //    dump($cacher);
-    //       }
-   
-              //fonctionnalité cacher en dernier de mon controller d'affichage
-
+    
        return view('words.show', compact('words','rechercheWord'));
         
     }

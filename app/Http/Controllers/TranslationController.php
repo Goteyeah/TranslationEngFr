@@ -57,8 +57,8 @@ $Mot->translations()->save($traduc);// je sauvegarde $traduc dans le mot
 
 // redirection et message
 return redirect()
-->action([WordController::class, 'show'])// redirection vers la route word show
-->with('message', 'la traduction de '. $traduc->translation . ' pour le mot '.$Mot->words .' est enregistrée'); //message de succes transmi à la vue show
+    ->action([WordController::class, 'show'])// redirection vers la route word show
+    ->with('message', 'la traduction de '. $traduc->translation . ' pour le mot '.$Mot->words .' est enregistrée'); //message de succes transmi à la vue show
 // redirection et message
 
     }

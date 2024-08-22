@@ -61,11 +61,19 @@ class UserController extends Controller
     public function update(Request $request, User $user, int $id)
     {
       $user = user::findOrFail($id);
+      $action = $request->input('value');
+      if($action==1)
+      {
         $user->blocked = true;
-        $user->save();
-        dump('bloque');
-
-        
+        $message = 'utilisateur bloqué';
+      } 
+      elseif ($action==2)
+      {
+        $user->blocked= false;
+        $message = 'utilisateur débloqué';
+      }
+       $user->save();   
+       $request->session()->flash('status',$message);
         
       return  redirect()->back();
     }
