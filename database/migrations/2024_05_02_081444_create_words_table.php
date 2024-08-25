@@ -18,9 +18,8 @@ return new class extends Migration
             $table->boolean('isValid')->default(true);
             $table->boolean('isDictionary')->default(true);
             $table->unsignedBigInteger('user_id');
-            // $table->tinyinteger('classement')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->default(1); // je rajoute la clef etrangere venant de User et fait une refernce a cette table
-            
+            $table->boolean('isFirst')->default(false); // pour le classement en haut de file
        
         });
 

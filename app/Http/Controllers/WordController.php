@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+
 
 class WordController extends Controller
 {
@@ -37,10 +39,6 @@ class WordController extends Controller
     public function store(Request $request)
     {
         
-     //------------------------------------- 
-     //mettre validated data
-     //-------------------------------------
-
         $injuresTab = ['vilain','mechant','pasbo']; //tableau de mots tabous
 
         $injures = implode(',',$injuresTab); //les tabou en chaine de caractères
@@ -58,7 +56,6 @@ $word->user_id= auth::id(); //rempli la colonne avec l id de la personne connect
 $word->isDictionary= $request->has('isDictionary'); // renvoi un booleen
 $word->isValid = $request->has('isValid'); //renvoi un booleen
 $word->fill($validatedData);
-//jajoute pour le classement etoile
 $word->save();
 
 
@@ -80,29 +77,40 @@ return redirect()
 
 function getWords(array $params = array()): LengthAwarePaginator
             {
+                DB::table('words')->update(['isFirst'=>0]); // utilisation du query builder pour remettre à zero la colonne 'isFirst' de la table 'words'
+                $query=Word::all();
                 $query = word::with(['translations','user']) 
-                
                     ->select('id','words','user_id');//selection des tables avec toutes leur collone dans cette requête
                    
                     // La clé étrangère user_id est nécessaire pour que Eloquent puisse faire correspondre les traductions avec les mots, et l auteur de la traduction et lauteur du mot posté.
                                             
                 if (isset($params['id']) && !empty($params['id'])){
                     $query->where('id','=',$params['id']);
+                    $word=$query->first(); //execute la requête $query ( query builder) avec la methode first()
+                    $word->isFirst=1;
+                    $word->save();                      
                 } 
                         
                 if (isset($params['title']) && !empty($params['title'])){
-                    $query->where('words','like','%'.$params['title'].'%');
+                    $query->where('words','like','%'.$params['title'].'%'); // requête pour trouver le mot et le mettre dans query builder
+                    $word=$query->first(); //execute la requête $query ( query builder) avec la methode first()
+                    $word->isFirst=1;
+                    $word->save();  
                 }
             
                 if (isset($params['translation']) && !empty($params['translation'])){
                     $query->whereHas('translations', function ($subQuery) use ($params) { //fonction anonyme (closure)// il y a des mots sans traductions
                         $subQuery->where('translation', 'like', '%' . $params['translation'] . '%');
-                    });
+                        
+                    }); 
+                    
+                    $word=$query->first(); //execute la requête $query ( query builder) avec la methode first()
+                    $word->isFirst=1;
+                    $word->save(); 
                 }
                            
-
-
-                $result = $query->paginate(1)->withQueryString();
+                
+                $result = $query->paginate(10)->withQueryString();
 
                 if($result->isEmpty())
                 {
@@ -113,6 +121,7 @@ function getWords(array $params = array()): LengthAwarePaginator
                 // code pour la recherche de mot par id ou par mot( je peux faire plein d'autre type de recherche cest à regarder grace au projet de thomas dasn les managers controller et vue)  
 
 // on positionne le methode getword à L'EXTERIEUR de show
+
 // je positionne la methode de classement a l'exterieur de la methode show
 function classement($query,int $ordo){
     
@@ -151,6 +160,7 @@ function classement($query,int $ordo){
         $query =Word::query(); //pourquoi query et pas all: car on travail directement sur des requêtes sql sans utiliser les modèles eloquants
         
         
+        $words=Word::orderBy('isFirst','desc')->paginate(10); // j'ordonne par isFirst avec le boolean 1 remonte en premier et le reste en dessous
 
       
         // recherche des mot par la première lettre
@@ -160,12 +170,13 @@ function classement($query,int $ordo){
         // recherche des mot par la première lettre
 
         $rechercheWord = $this->getWords($input);  // On met this pour appeller la methode qui est a l 'exterieur de show mais dans le controller wordS
-       
      
         if($ordo)
         {
              $words= $this->classement($query, $ordo);
         }
+
+        
     
        return view('words.show', compact('words','rechercheWord'));
         

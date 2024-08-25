@@ -82,7 +82,8 @@
   </div>
            <!-- l alphabet de a à z -->
     <div class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-     <!-- Recherche par title -->
+    
+    <!-- Recherche par title -->
     <div id="title" class='hidden'> 
     <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
         
@@ -169,11 +170,12 @@ value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
 
 <div style='color: red;'>
   @foreach ($rechercheWord as $truc)
-    <h2 >Mot: {{ $truc->words}} Mot posté par : {{$truc->user->name}}
-    <br> @foreach($truc->translations as $translation)<h2 > traduction proposées :{{$translation->translation}} par {{$translation->user->surname}} </h2>
+    <h2 >Mot:  <span class="text-blue-500"> {{ $truc->words}}</span> Mot posté par : {{$truc->user->name}}
+    <br> @foreach($truc->translations as $translation)<h2 > traduction proposées :  <span class="text-blue-500">{{$translation->translation}}</span> par {{$translation->user->surname}} </h2>
        @endforeach
   @endforeach
 </div>
+
 
  <!-- fonction de recherche equivalent a view/movie/backoffice/partial/search form dans le projet de thomas-->
 
@@ -183,16 +185,14 @@ value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
  
 
     <!-- j'itère sur l'objet word pour chaque items extrait "words" de la table dans la  bdd-->
+     
+    <div class="text-xl px-2 bg-gray-200 text-green-800 rounded"><!--badge de gris pour englober fiche/mot-->
     
     @foreach($words as $word) 
-
-<!-- je cache -->
-
-<div class="text-xl px-2 bg-green-200 text-green-800 rounded-full" >
-    <a  href="{{ route('word.edit', ['id'=>$word->id])}}" >mot : {{$word->words}} numero {{$word->id}}</a> <br>  <!-- je creer des liens avec la methode url que je mes dans href de la balise html <a>-->
- <!-- fonctionalitée cacher pour word->isdictionary je dois le mettre pour translation->isdictionary --> 
-</div>
+    
+    <a  href="{{ route('word.edit', ['id'=>$word->id])}}" class="bg-red-200 text-red-800 text-xl font-medium me-2 px-2.5 py-1.5 rounded-full dark:bg-red-200 dark:text-red-900">mot : {{$word->words}} numero {{$word->id}}</a> <br>  <!-- je creer des liens avec la methode url que je mes dans href de la balise html <a> jai mi le style de badge rouge en tailwind-->
     <!-- j'itère sur l'objet word et je 'extrait le champ "translations" de la table quand il y en a un-->
+    
     <!-- badge de couleur -->
     <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xl px-3 bg-purple-200 text-purple-800 rounded-full">   
     <!-- badge de couleur -->
@@ -202,6 +202,7 @@ value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
     <div  style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-blue-200 text-blue-800 rounded-full">    
     <a  href="{{route('translation.edit', ['id'=>$translation->id])}}">Traduction : {{$translation->translation}}</a>
     </div>
+    
     
  
     <!-- etoiles --><div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xxl px-3 bg-yellow-200 text-yellow-800 rounded-full">
@@ -238,11 +239,9 @@ value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
      <br>
     @endforeach
                                                                             
-    <div>      
-</div>
+        
 
-</div>
-
+</div> <!--badge gris pour englober fiche/mot-->
 <script src="{{asset('/test.js')}}"></script>
 </body>
 </html>

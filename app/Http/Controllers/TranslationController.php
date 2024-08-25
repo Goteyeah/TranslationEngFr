@@ -115,7 +115,7 @@ return redirect()
     {
        
         $starsDate = Carbon::parse($userNbStars->starsDate); //on transforme cette date en instance carbon
-        $time = now();
+        $time = now(); // date actuel jour mois année
 
         if  ($starsDate->diffInDays($time) > 7 ) // si la différence jour entre les deux dates carbon inferieure à 7 jours
         {   
