@@ -8,6 +8,7 @@ use App\Http\Controllers\dictionaryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\Burgercontroller;
 
 use Illuminate\Support\Facades\App;
 use App\Http\Middleware\Localization;
@@ -86,10 +87,10 @@ Route::get('startC', function(){
     Route::get('user/delete/{id}', [UserController::class,'destroy'])->name('user.delete');
 
     //j'ai creer un middleware pour changer la langue
-//    Route::get('locale',[LocalizationController::class,'getLang'])->name('getlang'); //connaitre la langue active
+   Route::get('locale',[LocalizationController::class,'getLang'])->name('getlang'); //connaitre la langue active
    
-//    Route::get('locale/{lang}',[LocalizationController::class,'setLang'])->name('setlang'); // va changer la langue par default on appel le middleware localization et on utilise la variable de session
+   Route::get('locale/{lang}',[LocalizationController::class,'setLang'])->name('setlang'); // va changer la langue par default on appel le middleware localization et on utilise la variable de session
    //j'ai creer un middleware pour changer la langue
    Route::get('section/update/{id}',[UserController::class,'update'])->name('user.update');
 
-   
+   Route::get('Burger', [Burgercontroller::class , 'show'])->name('Burger');

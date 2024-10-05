@@ -3,8 +3,8 @@ console.log('ordonner');
 // debut du script dropdown
 
 document.addEventListener('DOMContentLoaded', function () {
-    var dropdownButton = document.getElementById('dropdownDefaultButton_B'); // vise le bouton par son id
-    var dropdownMenu = document.getElementById('dropdown_B'); // on vise le menu par son id
+    var dropdownButton = document.getElementById('dropdownDefaultButtonD'); // vise le bouton par son id
+    var dropdownMenu = document.getElementById('dropdownD'); // on vise le menu par son id
     var dropdown_option = dropdownMenu.querySelectorAll('.ordonner'); //selectionner toutes les class="" avec 'ordonner'
 
     dropdownButton.addEventListener('click', function () {
@@ -17,26 +17,39 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdownMenu.classList.add('hidden');
 
 
-            var inputA = document.getElementById('ordoA');
-            var inputB = document.getElementById('ordoB');
-            var inputC = document.getElementById('ordoC');
-
-            var value = option.getAttribute('data-value');
+            var inputA = document.getElementById('ordoAlphabetique');
             inputA.classList.add('hidden');
+
+            var inputB = document.getElementById('ordoNbTraductions');
             inputB.classList.add('hidden');
+
+            var inputC = document.getElementById('ordoDateCreation');
             inputC.classList.add('hidden');
 
+
+            var inputHidden = document.getElementById('ordonnerR');
+
+            var value = option.getAttribute('data-value');
+
+
             if (value == '1') {
+                inputHidden.setAttribute('value', 1);
                 inputA.classList.remove('hidden');
-                console.log("inputA");
+                console.log('passe par inputA');
+
             }
             else if (value == '2') {
+                inputHidden.setAttribute('value', 2);
                 inputB.classList.remove('hidden');
-                console.log('inputB');
+                console.log('passr par inputB');
             }
             else if (value == '3') {
+
+                inputHidden.setAttribute('value', 3);
                 inputC.classList.remove('hidden');
-                console.log('inputC');
+                console.log('passe par inputC');
+
+
             }
 
 

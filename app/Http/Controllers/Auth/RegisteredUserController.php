@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        dump("ici lalalallalllalalalalalalaallalalalala");
+        dump("ici  create de registerusercontroller");
         $tabSection = Section::all();
         return view('auth.register',compact('tabSection'));
     }

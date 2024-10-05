@@ -18,11 +18,18 @@ class Localization
     public function handle(Request $request, Closure $next): Response
     { 
        
-        if ( \Session::has('lang')) {
-            // Récupération de la 'lang' dans Session et activation
-            \App::setLocale(\Session::get('lang'));
-            dump("je viens de terminer le middleware");
+        // Vérifier si la langue est définie dans la session
+        if (Session::has('lang')) {
+            // Récupérer la langue depuis la session et la définir
+            App::setLocale(Session::get('lang'));
         }
+
+       
+        // if ( \Session::has('lang')) {
+        //     // Récupération de la 'lang' dans Session et activation
+        //     \App::setLocale(\Session::get('lang'));
+        //     dump("je viens de terminer le middleware");
+        // }
         return $next($request);
     }
 }

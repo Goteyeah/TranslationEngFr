@@ -1,4 +1,15 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  @vite('resources/css/app.css')
+
+  <title>Document</title>
+</head>
+<body>
+  
 
 <div>
 <h1>Dictionnaire des mots avec leur traductions validés</h1>
@@ -58,11 +69,13 @@ value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : 
 <!--  recherche equivalent view/movie/backoffice/partial/search form -->
 
 @foreach($finalsWord as $finals)
-<h1>Mots traduits: {{$finals->words}} Posté par: {{$finals->user->name}}</h1>
+<h1 >Mots traduits: <p class="bg-red-200 text-red-800 text-xl font-medium me-2 px-2.5 py-1.5 rounded-full dark:bg-red-200 dark:text-red-900 inline">{{$finals->words}}</p> Posté par: {{$finals->user->name}}</h1>
 @foreach($finals->translations as $translation)
-<p style="color: green;">Traduction associées:  {{$translation->translation}} Traduit par {{$translation->user->name}}<p>
+<p >Traduction associées:  <p 
+class="text-xl px-3 bg-purple-200 text-purple-800 rounded-full inline">{{$translation->translation}} </p>Traduit par:<p class="text-xs  text-green-800 rounded" >{{$translation->user->name}}</p><p>
   @endforeach
 @endforeach
 <h3>{{$finalsWord->links()}}</h3>
 
-
+</body>
+</html>
