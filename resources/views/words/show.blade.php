@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
+
   <title>Document</title>
 </head>
 
@@ -18,6 +21,11 @@
 @endif
   </h1>
   <!-- message flash -->
+
+  <!--Dropdown de classement en envoyant la valeur de $ordo dasn la methode show du controller word-->
+  <x-dropdown-class>
+  </x-dropdown-class>
+  <!--Dropdown de classement en envoyant la valeur de $ordo dasn la methode show du controller word-->
 
 
   <h1><a href="{{ route('word.create')}}">+ Nouveau mot anglais</a></h1>
@@ -45,233 +53,228 @@
   <!-- etoile et recharge de solde d'étoiles -->
 
   <!-- tri                 tri-->
-  <div class="space-y-10">
 
-
-    <form action="{{ route('word.show') }}">
-      @csrf
-      <div
-        class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-        <!-- bordure autour du bouton bleu elle grossi et rapetisse-->
-
-        <button id="dropdownDefaultButtonD" data-dropdown-toggle="dropdownD"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          type="button">Classer par :<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 10 6">
-
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="m1 1 4 4 4-4" />
-          </svg>
-        </button>
-        <h1 class="hidden" id="ordoAlphabetique">Ordre alphabétique</h1>
-        <h1 class="hidden" id="ordoNbTraductions">Nombre de traductions</h1>
-        <h1 class="hidden" id="ordoDateCreation">Ordre chronologique</h1>
-
-        <!--bouton rouge-->
-        <button
-          class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer"
-          type="submit">classer</button>
-        <!--bouton rouge-->
-
-
-      </div> <!-- bordure autour du bouton bleu elle grossi et rapetisse-->
-
-      <div id="dropdownD" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButtonD">
-          <li>
-            <a href="#" data-value="1"
-              class="ordonner lock px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ordre
-              alphabétique</a>
-          </li>
-          <li>
-            <a href="#" data-value="2"
-              class="ordonner block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Nombre de
-              traduction</a>
-          </li>
-          <li>
-            <a href="#" data-value="3"
-              class="ordonner block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ordre
-              chronologique</a>
-          </li>
-        </ul>
-      </div>
-  </div>
-  <input id='ordonnerR' type="hidden" name="ordonner" value="">
-  </form>
   <!-- tri            tri-->
 
   <!-- fonctionalitée nombre mot par page dasn la pagination -->
-   <div class="flex justify-center">
-  
-  <form method="get" action="{{ route('word.show')}}">
-    <label for="varvar">Nombre mot par page</label>
-    <input type="number" name="varvar" id="varvar" value="{{ request('varvar')}}">
-    <button type="submit">soumettre</button>
-  </form>
+  <div class="flex justify-center">
 
-  <!-- fonctionalitée nombre mot par page dasn la pagination -->
+    <form method="get" action="{{ route('word.show')}}">
+      <label for="varvar">Nombre mot par page</label>
+      <input type="number" name="varvar" id="varvar" value="{{ request('varvar')}}">
+      <button type="submit">soumettre</button>
+    </form>
+
+    <!-- fonctionalitée nombre mot par page dasn la pagination -->
   </div>
 
   <!-- fonction de recherche equivalent a view/movie/backoffice/partial/search form dans le projet de thomas-->
   <form method="get" action="{{ route('word.show')}}">
 
     <!-- premiere skin css pour la barre de recherche POUR LINSTANT ELLE CHERCHE PAR MOT-->
-      <div class="space-y-10">
-        
-        <!-- l alphabet de a à z -->
-        <div class="text-4xl">
-          @foreach (range('A', 'Z') as $letter) 
+    <div class="space-y-10">
+
+      <!-- l alphabet de a à z -->
+      <div class="text-4xl">
+        @foreach (range('A', 'Z') as $letter) 
         <h1 style="display: inline;"><a href="{{ route('word.show', ['letter' => $letter]) }}">{{$letter}}</a></h1>
         <!-- clefs égales aux valeur ( 'A'=>'A') etc-->
-      @endforeach
+    @endforeach
+      </div>
+      <!-- l alphabet de a à z -->
+
+<x-dropdown-search>
+
+</x-dropdown-search>
+      <div
+        class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+
+        <!-- Recherche par title -->
+        <div id="title" class='hidden'>
+          <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
+
+            <!-- loupe -->
+            <x-loupe />
+            <!-- loupe -->
+            <input name="title" class="bg-gray-100 outline-none" type="text" placeholder="Article name or keyword..."
+              value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : '' }}" />
+          </div>
         </div>
-        <!-- l alphabet de a à z -->
+        <!-- Recherche par title -->
+        <!-- recherche par traduction -->
+        <div class="hidden" id="translation-container">
+          <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
 
+            <!-- loupe -->
+            <x-loupe />
+            <!-- loupe -->
 
+            <div>
+              <label for="translation" class="form-label fw-bold fs-8">Rechercher une traduction</label>
+              <input id="translation" type="text" class="form-control form-control-sm" name="translation"
+                value="{{ isset($input['translation']) && !empty($input['translation']) ? $input['translation'] : '' }}">
+            </div>
+          </div>
+        </div>
+        <!-- recherche par traduction -->
+        <!-- recherche par id -->
+        <div id="id-container" class="hidden">
+          <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
+            <!-- Loupe-->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <!-- Loupe-->
+            <div>
+              <label for="id" class="form-label form-label-sm fw-bold fs-8">Rechercher un mot par son numero</label>
+              <input id="id" type="text" class="form-control form-control-sm" name="id"
+                value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
+            </div>
+          </div>
+        </div>
+        <!-- recherche par id -->
+
+        <div class="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
+
+          <button id="dropdownDefaultButtonB" data-dropdown-toggle="dropdownB"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button">Rechercher un mot par : <svg class="w-4 h-4 ms-3 text-lg" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 4 4 4-4" />
+            </svg>
+          </button>
+
+          <!-- skin TW pour le dropdown bleu jai changer la taille du text de 'sm' en 'lg'-->
+          <div id="dropdownB"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-lg text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+              <li>
+                <a data-value="1" href="#"
+                  class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mot</a>
+              </li>
+              <li>
+                <a data-value="2" href="#"
+                  class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Traduction</a>
+              </li>
+              <li>
+                <a data-value="3" href="#"
+                  class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Numero</a>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
         <div
-          class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-
-          <!-- Recherche par title -->
-          <div id="title" class='hidden'>
-            <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-
-              <!-- loupe -->
-              <x-loupe />
-              <!-- loupe -->
-              <input name="title" class="bg-gray-100 outline-none" type="text" placeholder="Article name or keyword..."
-                value="{{ isset($input['title']) && !empty($input['title']) ? $input['title'] : '' }}" />
-            </div>
-          </div>
-          <!-- Recherche par title -->
-          <!-- recherche par traduction -->
-          <div class="hidden" id="translation-container">
-            <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-
-              <!-- loupe -->
-              <x-loupe />
-              <!-- loupe -->
-
-              <div>
-                <label for="translation" class="form-label fw-bold fs-8">Rechercher une traduction</label>
-                <input id="translation" type="text" class="form-control form-control-sm" name="translation"
-                  value="{{ isset($input['translation']) && !empty($input['translation']) ? $input['translation'] : '' }}">
-              </div>
-            </div>
-          </div>
-          <!-- recherche par traduction -->
-          <!-- recherche par id -->
-          <div id="id-container" class="hidden">
-            <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-              <!-- Loupe-->
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <!-- Loupe-->
-              <div>
-                <label for="id" class="form-label form-label-sm fw-bold fs-8">Rechercher un mot par son numero</label>
-                <input id="id" type="text" class="form-control form-control-sm" name="id"
-                  value="{{ isset($input['id']) && !empty($input['id']) ? $input['id'] : '' }}">
-              </div>
-            </div>
-          </div>
-          <!-- recherche par id -->
-
-          <div class="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
-
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button">Rechercher un mot par : <svg class="w-4 h-4 ms-3 text-lg" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 1 4 4 4-4" />
-              </svg>
-            </button>
-
-            <!-- skin TW pour le dropdown bleu jai changer la taille du text de 'sm' en 'lg'-->
-            <div id="dropdown"
-              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-              <ul class="py-2 text-lg text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <a data-value="1" href="#"
-                    class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mot</a>
-                </li>
-                <li>
-                  <a data-value="2" href="#"
-                    class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Traduction</a>
-                </li>
-                <li>
-                  <a data-value="3" href="#"
-                    class="chercher block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Numero</a>
-                </li>
-
-              </ul>
-            </div>
-
-          </div>
-          <div
-            class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-            <span> <button type="submit" value="search">chercher</button>
-            </span>
-          </div>
+          class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+          <span> <button type="submit" value="search">chercher</button>
+          </span>
         </div>
+      </div>
 
-        <!-- skin TW pour le dropdown bleu jai changer la taille du text de 'sm' en 'lg'-->
+      <!-- skin TW pour le dropdown bleu jai changer la taille du text de 'sm' en 'lg'-->
 
 
 
 
-        <button type="submit" value="search">chercher</button>
+      <button type="submit" value="search">chercher</button>
   </form>
 
 
   <!-- fonction de recherche equivalent a view/movie/backoffice/partial/search form dans le projet de thomas-->
 
 
+  <!-- ESSAI DE TABLEAU AVEC FLOWBITE -->
 
+  <!-- tout ce bloc est entre les balises x-tableau-ga et est present dans la page tableau-ga dans l'unique slot -->
+
+  <x-tableau-ga> <!--tableau complet-->
+    @foreach ($words as $word)
+
+    <x-tableau-ga-preci><!-- ligne dans le tableau -->
+      <x-slot:slotA> <!-- slot qui contient les itérations sur les collections de mots + traduc -->
+      <div class="rounded-lg border-4 border-red-300 p-4">
+        <!-- entour 1 mot + ses traductions correspondante dans un encadré pour bien distinguer quand on passe d'un mot a un autre -->
+
+
+        @foreach ($word->translations as $translation) <!-- toutes les traduction par mot qui lui correspond -->
+
+      <div class="flex items-center space-x-2">
+      <span>{{$translation->translation}}</span><x-etoile></x-etoile><span>{{$translation->stars}}</span>
+      </div>
+      <!-- met sur la même ligne -->
+
+    @endforeach
+
+      </div>
+      </x-slot:slotA>
+
+      <x-slot:slotB>
+
+      </x-slot:slotB>
+      <x-slot:slotC>
+      <div class="rounded-lg bg-gray-100 p-2 border-4 border-red-300 p-4">
+
+        {{$word->words}}<br>{{$word->id}}<br> <!-- colonne de mot anglais avec leur numero -->
+      </div>
+      </x-slot:slotC>
+
+    </x-tableau-ga-preci> <!--  ligne dans le tableau -->
+
+
+  @endforeach
+  </x-tableau-ga><!--tableau complet-->
+  <!-- tout ce bloc est entre les balises x-tableau-ga et est present dans la page tableau-ga dans l'unique slot -->
+
+
+  <!-- ESSAI DE TABLEAU AVEC FLOWBITE -->
 
 
   <!-- j'itère sur l'objet word pour chaque items extrait "words" de la table dans la  bdd-->
 
-  <div class="text-xl px-2 bg-gray-200 text-green-800 rounded"><!--badge de gris pour englober fiche/mot-->
 
-    @foreach($words as $word) 
+  @foreach($words as $word) 
 
-    <a href="{{ route('word.edit', ['id' => $word->id])}}"
-      >mot
-      : <span class="bg-red-200 text-red-800 text-xl font-medium me-2 px-2.5 py-1.5 rounded-full dark:bg-red-200 dark:text-red-900 ">{{$word->words}}</span> numero <span class="bg-red-200 text-red-800 text-xl font-medium me-2 px-2.5 py-1.5 rounded-full dark:bg-red-200 dark:text-red-900 "> {{$word->id}}</span></a> <br>
+    <a href="{{ route('word.edit', ['id' => $word->id])}}">mot
+    : <span
+      class="bg-red-200 text-red-800 text-xl font-medium me-2 px-2.5 py-1.5 rounded-full dark:bg-red-200 dark:text-red-900 ">{{$word->words}}</span>
+    numero <span
+      class="bg-red-200 text-red-800 text-xl font-medium me-2 px-2.5 py-1.5 rounded-full dark:bg-red-200 dark:text-red-900 ">
+      {{$word->id}}</span></a> <br>
     <!-- je creer des liens avec la methode url que je mes dans href de la balise html <a> jai mi le style de badge rouge en tailwind-->
     <!-- j'itère sur l'objet word et je 'extrait le champ "translations" de la table quand il y en a un-->
 
     <!-- badge de couleur -->
     <div style="padding-top: 0.1em; padding-bottom: 0.1rem"
-      class="text-xl px-3 bg-purple-200 text-purple-800 rounded-full">
-      <!-- badge de couleur -->
-      <a href="{{route('translation.create', ['id' => $word->id])}}">Créer une traduction pour {{$word->words}}</a> <br>
+    class="text-xl px-3 bg-purple-200 text-purple-800 rounded-full">
+    <!-- badge de couleur -->
+    <a href="{{route('translation.create', ['id' => $word->id])}}">Créer une traduction pour {{$word->words}}</a> <br>
     </div>
     @foreach($word->translations as $translation)
     <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xl px-3 bg-blue-200 text-blue-800 rounded-full">
-      <a href="{{route('translation.edit', ['id' => $translation->id])}}">Traduction : {{$translation->translation}}</a>
+    <a href="{{route('translation.edit', ['id' => $translation->id])}}">Traduction : {{$translation->translation}}</a>
     </div>
 
 
 
     <!-- etoiles -->
     <div style="padding-top: 0.1em; padding-bottom: 0.1rem"
-      class="text-xxl px-3 bg-yellow-200 text-yellow-800 rounded-full">
-      <p>Nombre d'étoiles: {{$translation->stars}}</p>
+    class="text-xxl px-3 bg-yellow-200 text-yellow-800 rounded-full">
+    <p>Nombre d'étoiles: {{$translation->stars}}</p>
     </div>
 
     <div style="padding-top: 0.2em; padding-bottom: 0.2rem"
-      class="flex items-center space-x-1 text-xl px-2 bg-gray-200 text-gray-800 rounded-full">
-      <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-500 rounded-full"></div>
-      <a href="{{route('dictionary.update', ['id' => $translation->id])}}">Ajouter au dictionnaire</a>
+    class="flex items-center space-x-1 text-xl px-2 bg-gray-200 text-gray-800 rounded-full">
+    <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-500 rounded-full"></div>
+    <a href="{{route('dictionary.update', ['id' => $translation->id])}}">Ajouter au dictionnaire</a>
     </div>
     <form method="POST" action="{{ route('translation.update', ['id' => $translation->id]) }}">
-      @csrf
+    @csrf
 
-      <div style="padding-top: 0.2em; padding-bottom: 0.2rem"
+    <div style="padding-top: 0.2em; padding-bottom: 0.2rem"
       class="flex items-center space-x-1 text-xl px-2 bg-gray-200 text-gray-800 rounded-full">
       <div style="width: 0.4rem; height: 0.4rem"></div>
       <!-- etoile-->
@@ -282,8 +285,8 @@
       </svg>
       <!-- étoile -->
       <button type="submit" name="stars" value="1">Ajouter une étoile</button>
-      </div>
-      <!-- etoiles -->
+    </div>
+    <!-- etoiles -->
     </form>
 
     <p>Traduit par: {{$translation->user->name}}</p>
@@ -296,13 +299,16 @@
 
 
 
-    <!--les pages paginées de la collection $words -->
-    <h3>{{ $words->links() }}</h3>
+  <!--les pages paginées de la collection $words -->
+  <h3>{{ $words->links() }}</h3>
 
-  </div> <!--badge gris pour englober fiche/mot-->
+
   <div></div>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+<!-- 
   <script src="{{asset('/test.js')}}"></script>
-  <script src="{{asset('/dropd_B.js')}}"></script>
+  <script src="{{asset('/dropd_B.js')}}"></script> -->
 </body>
 
 </html>

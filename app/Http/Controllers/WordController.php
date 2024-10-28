@@ -147,10 +147,9 @@ class WordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Word $word, Request $request)
+    public function show(Word $word, Request $request,int $ordo=null)
     {
         $varvar = $request->input('varvar');
-        $ordo = $request->input('ordonner');
         $letter = $request->input('letter'); // récupère la valeur dans une lettre de l'alphabet dans ['letter'=>$letter ] et PAS d'un name='letter', 
         $input = $request->all();
         $query = Word::query(); //pourquoi query et pas all: car on travail directement sur des requêtes sql sans utiliser les modèles eloquants
@@ -158,11 +157,7 @@ class WordController extends Controller
 
 
         $rechercheWord = $this->getWords($input);  // On met this pour appeller la methode qui est a l 'exterieur de show mais dans le controller wordS
-        // if (word::where('isFirst', 1)->exists()) {
-        //     dd("is first exist");
-        // } else {
-        //     dd("pas de isfirst");
-        // }
+       
 
         $words = Word::orderBy('isFirst', 'desc')->paginate($varvar); // j'ordonne par isFirst avec le boolean 1 remonte en premier et le reste en dessous
 

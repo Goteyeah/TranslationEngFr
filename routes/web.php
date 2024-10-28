@@ -71,7 +71,7 @@ Route::get('startC', function(){
     Route::get('translation/edit/{id}', [TranslationController::class,'edit'])->name('translation.edit');
     Route::post('translation/update/{id}', [TranslationController::class, 'update'])->name('translation.update'); // on signal {id} que lon va retrouver dans une methode du controller translationController SINON ca marche pas !
     
-    Route::get('word/show',[WordController::class, 'show'])->name('word.show');
+    Route::get('word/show/{ordo?}', [WordController::class,'show'])->name('word.show');
     Route::get('word/edit/{id}',[WordController::class, 'edit'])->name('word.edit'); //jai ecrit "/{id} pour que l'adresse dans la barre url soit plus propre il y aura l id juste après
 
     Route::post('word/update/{id}', [WordController::class, 'update'])->name('word.update'); //je nomme la route avec name pour lappeller dans les formulairesS
